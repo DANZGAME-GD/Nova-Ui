@@ -1,0 +1,34 @@
+{
+	"geode": "4.10.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "danzgame.nova-ui",
+	"name": "Nova Ui",
+	"version": "v1.0.0",
+	"developer": "DANZGAME",
+	"description": "",
+	"dependencies": {
+		"geode.node-ids": ">=v1.20.0"
+	},
+	"resources": {
+		"sprites": [
+			"sprites/*"
+		]
+	},
+	"settings": {
+		"enable-nova-ui": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Nova Ui"
+		},
+		"hide-social-media": {
+			"type": "bool",
+			"default": true,
+			"name": "Hide Social Media"
+		}
+	}
+}
