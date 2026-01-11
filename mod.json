@@ -20,15 +20,10 @@
 		]
 	},
 	"settings": {
-		"enable-nova-ui": {
+		"enable-user-interface": {
 			"type": "bool",
 			"default": true,
-			"name": "Enable Nova Ui"
-		},
-		"hide-social-media": {
-			"type": "bool",
-			"default": true,
-			"name": "Hide Social Media"
+			"name": "Enable User Interface"
 		}
 	}
 }
