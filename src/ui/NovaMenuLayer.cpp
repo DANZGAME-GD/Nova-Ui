@@ -19,50 +19,74 @@ class $modify(NovaMenuLayer, MenuLayer) {
         menuva->setID("nova_menu");
         this->addChild(menuva);
 
-        auto makeButton = [&](SEL_MenuHandler cb) {
+        //hide menu
+        bool hide = Mod::get()->getSettingValue<bool>("enable-user-interface");
+        
+        auto playbtn = this->getChildByID("main-menu");
+        auto media = this->getChildByID("social-media-menu");
+        auto more = this->getChildByID("more-games-menu");
+        auto gdtitle = this->getChildByID("main-title");
+
+        auto makeButton = [&](const char* logoframe, const char* text, const char* fnt, const char* idspr, const char* idlogo, const char* idtext,  SEL_MenuHandler cb) {
             auto spr = CCSprite::create("Button.png"_spr);
-            auto btn = CCMenuItemSpriteExtra::create(spr, this, cb);
-            return btn;
-        };
-        auto logo = [&] (const char* frame) {
-            auto imagelogo = CCSprite::createWithSpriteFrameName(frame);
-            return imagelogo;
+            auto logo = CCSprite::create(logoframe);
+            auto label = CCLabelBMFont::create(text, fnt);
+            spr->setID(idspr);
+            logo->setID(idlogo);
+            label->setID(idtext);
+            logo->setPosition({
+                spr->getContentSize().width / 2 - 50,
+                spr->getContentSize().height / 2
+            });
+            label->setPosition({ 
+                spr->getContentSize().width / 2 - 36,
+                spr->getContentSize().height / 2 
+            });
+            label->setAnchorPoint({ 0.0f, 0.5f });
+            logo->setScale(0.4);
+            label->setScale(0.4);
+            
+            
+            spr->addChild(logo);
+            spr->addChild(label);
+            return CCMenuItemSpriteExtra::create(spr, this, cb);
         };
 
         // make button
-        auto btn1 = makeButton(menu_selector(NovaMenuLayer::onPlay));
-        auto btn2 = makeButton(menu_selector(NovaMenuLayer::onCreator));
-        auto btn3 = makeButton(menu_selector(NovaMenuLayer::onOptions));
-        auto btn4 = makeButton(menu_selector(NovaMenuLayer::onOptions));
-        auto btn5 = makeButton(menu_selector(NovaMenuLayer::onOptions));
-        auto btn6 = makeButton(menu_selector(NovaMenuLayer::onQuit));
-
-        // logo to button
-        auto logo1 = logo("geode.loader/category-dot.png");
-        logo1->setPosition({ 0, 0});
-        logo1->setScale({0.35});
-        logo1->setAnchorPoint({ 0.0f, 0.5f});
-        logo1->setID("test-1");
-        btn1->addChild(logo1);
-
+        auto mainlevelbtn = makeButton("main_icon.png"_spr, "Main Levels", "gjFont52.fnt", "main-levels-btn", "main-levels-icon", "main-levels-label",  menu_selector(NovaMenuLayer::onPlay));
+        auto creatorbtn = makeButton("creator_point.png"_spr, "Creator", "gjFont52.fnt", "creator-btn", "creator-icon", "creator-label", menu_selector(NovaMenuLayer::onCreator));
+        auto iconbtn = makeButton("exit.png"_spr, "Icon", "gjFont52.fnt", "icons-btn", "icons-logo", "icons-label", menu_selector(NovaMenuLayer::onGarage));
+        auto settingsbtn = makeButton("settings.png"_spr, "Settings", "gjFont52.fnt", "settings-btn", "settings-icon", "settings-label", menu_selector(NovaMenuLayer::onOptions));
+        auto geodebtn = makeButton("geode_logo.png"_spr, "Geode", "gjFont52.fnt", "geoode-btn", "geode-icons", "geode-label", menu_selector(NovaMenuLayer::onOptions));
+        auto exitbtn = makeButton("exit.png"_spr, "Quit", "gjFont52.fnt", "exit-btn", "exit-icon", "exit-label", menu_selector(NovaMenuLayer::onQuit));
+        
         // set position
-        btn1->setPosition({ 75, winSize.height / 2 + 60 });
-        btn2->setPosition({ 75, winSize.height / 2 + 22 });
-        btn3->setPosition({ 75, winSize.height / 2 - 16 });
-        btn4->setPosition({ 75, winSize.height / 2 - 52 });
-        btn5->setPosition({ 75, winSize.height / 2 - 88 });
-        btn6->setPosition({ 75, winSize.height / 2 - 124 });
+        mainlevelbtn->setPosition({ 75, winSize.height / 2 + 60 });
+        mainlevelbtn->setID("main-levels-button");
+        creatorbtn->setPosition({ 75, winSize.height / 2 + 22 });
+        creatorbtn->setID("creator-buttonn");
+        iconbtn->setPosition({ 75, winSize.height / 2 - 16 });
+        iconbtn->setID("icons-button");
+        settingsbtn->setPosition({ 75, winSize.height / 2 - 52 });
+        settingsbtn->setID("settings-button");
+        geodebtn->setPosition({ 75, winSize.height / 2 - 88 });
+        exitbtn->setPosition({ 75, winSize.height / 2 - 124 });
+        exitbtn->setID("quit-button");
 
         //add button to menu
-        menuva->addChild(btn1);
-        menuva->addChild(btn2);
-        menuva->addChild(btn3);
-        menuva->addChild(btn4);
-        menuva->addChild(btn5);
-        menuva->addChild(btn6);
+        menuva->addChild(mainlevelbtn);
+        menuva->addChild(creatorbtn);
+        menuva->addChild(iconbtn);
+        menuva->addChild(settingsbtn);
+        menuva->addChild(geodebtn);
+        menuva->addChild(exitbtn);
 
-if (!Mod::get()->getSettingValue<bool>("enable-nova-ui"))
+if (!Mod::get()->getSettingValue<bool>("enable-user-interface"))
     menuva->removeAllChildrenWithCleanup(true);
+    playbtn->setVisible(!hide);
+    media->setVisible(!hide);
+    more->setVisible(!hide);
+    gdtitle->setVisible(!hide);
     return;
     }
     
