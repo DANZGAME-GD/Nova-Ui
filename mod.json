@@ -1,18 +1,22 @@
 {
-	"geode": "4.10.0",
+	"geode": "5.6.1",
 	"gd": {
-		"win": "2.2074",
-		"android": "2.2074",
-		"mac": "2.2074",
-		"ios": "2.2074"
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
 	},
-	"id": "danzgame.nova-ui",
+	"id": "danzgame.nova_ui",
 	"name": "Nova Ui",
-	"version": "v1.0.0",
+	"version": "v0.0.1",
 	"developer": "DANZGAME",
 	"description": "",
 	"dependencies": {
-		"geode.node-ids": ">=v1.20.0"
+		"geode.node-ids": ">=1.22.0"
+	},
+	"links": {
+		"source": "https://github.com/DANZGAME-GD/Nova-Ui",
+		"community": "https://discord.gg/WJgFhSpTz5"
 	},
 	"resources": {
 		"sprites": [
@@ -23,7 +27,14 @@
 		"enable-user-interface": {
 			"type": "bool",
 			"default": true,
-			"name": "Enable User Interface"
+			"name": "Enable User Interface",
+			"description": "Tes"
+		},
+		"move-bottom-ui": {
+			"type": "bool",
+			"default": false,
+			"name": "Move Bottom UI",
+			"description": "Move the bottom UI to the top of the screen."
 		}
 	}
 }
