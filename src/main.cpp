@@ -36,6 +36,6 @@ class $modify(MyMenuLayer, MenuLayer) {
 
 	
 	void onMyButton(CCObject*) {
-		FLAlertLayer::create("Geode", "Hello from my custom mod!", "OK")->show();
+		cocos2d::CCScene::create();
 	}
 };
